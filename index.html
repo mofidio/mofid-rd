@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>کمیته تحقیق و توسعه مرکز تماس کارگزاری مفید</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look, supporting Persian characters */
+        body {
+            font-family: 'Vazirmatn', 'Inter', sans-serif; /* Prioritize Vazirmatn for Persian */
+            direction: rtl; /* Right-to-left direction for Persian */
+            text-align: right; /* Align text to the right */
+            color: #333; /* A slightly darker gray for better readability */
+        }
+        /* Specific font for Persian if available, otherwise Inter */
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Regular.woff2') format('woff2');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Vazirmatn';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn-Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* Custom animations */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes bounceIn {
+            0%, 20%, 40%, 60%, 80%, 100% {
+                transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+            }
+            0% { opacity: 0; transform: scale3d(0.3, 0.3, 0.3); }
+            20% { transform: scale3d(1.1, 1.1, 1.1); }
+            40% { transform: scale3d(0.9, 0.9, 0.9); }
+            60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); }
+            80% { transform: scale3d(0.97, 0.97, 0.97); }
+            100% { opacity: 1; transform: scale3d(1, 1, 1); }
+        }
+        @keyframes blob {
+            0% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0px, 0px) scale(1); }
+        }
+
+        .animate-fade-in-down { animation: fadeInDown 1s ease-out forwards; }
+        .animate-fade-in-up { animation: fadeInUp 1s ease-out forwards; }
+        .animate-bounce-in { animation: bounceIn 1s ease-out forwards; }
+        .animate-blob { animation: blob 7s infinite cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+        .animation-delay-2000 { animation-delay: 2s; }
+        .animation-delay-4000 { animation-delay: 4s; }
+
+        /* Custom colors inspired by emofid.com */
+        .bg-mofid-blue { background-color: #003366; } /* Dark blue */
+        .text-mofid-blue { color: #003366; }
+        .hover\:bg-mofid-light-blue:hover { background-color: #004488; } /* Slightly lighter for hover */
+        .border-mofid-blue { border-color: #003366; }
+        .focus\:ring-mofid-blue:focus { --tw-ring-color: #003366; }
+
+        /* Game specific styles for Symbol Status Game */
+        #symbolStatusGameContainer {
+            background-color: #e0f2f7; /* Light blue background for game */
+            border: 2px solid #003366;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        .game-button {
+            background-color: #003366;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .game-button:hover {
+            background-color: #004488;
+        }
+        .game-button.selected {
+            background-color: #0066CC; /* A brighter blue when selected */
+            border: 2px solid #001A33;
+        }
+        .game-button.correct {
+            background-color: #4CAF50; /* Green for correct */
+        }
+        .game-button.incorrect {
+            background-color: #F44336; /* Red for incorrect */
+        }
+
+        /* Hero section background image style */
+        .hero-background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://lh3.googleusercontent.com/gps-cs-s/AC9h4npDwX-OtzxZ4fs7UXzw8Q8n4UgquCRgPvp1zzvyw4A_iavaKfscBNLx2CKy6VZ7-4EqWKSVxFw0ffoc8xCjrYzL-lOi7ioFuZGCm8WxXXpHnlnN4oeICgJsBwkDPDsySEOp8U1dMg=s680-w680-h510');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.1; /* Adjust opacity as needed */
+            z-index: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 rounded-b-lg">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2 rtl:space-x-reverse text-2xl font-bold text-mofid-blue rounded-md p-2 hover:bg-gray-100 transition duration-300">
+                <img src="https://www.emofid.com/assets/images/logo/logo.svg" onerror="this.onerror=null;this.src='https://placehold.co/40x40/003366/FFFFFF?text=لوگو';" alt="لوگو کارگزاری مفید" class="rounded-full">
+                <span>کمیته تحقیق و توسعه مرکز تماس</span>
+            </a>
+            <ul class="hidden md:flex space-x-6 rtl:space-x-reverse">
+                <li><a href="#responsibilities" class="text-gray-600 hover:text-mofid-blue font-medium transition duration-300 rounded-md p-2 hover:bg-gray-100">وظایف</a></li>
+                <li><a href="#about" class="text-gray-600 hover:text-mofid-blue font-medium transition duration-300 rounded-md p-2 hover:bg-gray-100">درباره ما</a></li>
+                <li><a href="#cooperation" class="text-gray-600 hover:text-mofid-blue font-medium transition duration-300 rounded-md p-2 hover:bg-gray-100">دعوت به همکاری</a></li>
+                <li><a href="#quiz" class="text-gray-600 hover:text-mofid-blue font-medium transition duration-300 rounded-md p-2 hover:bg-gray-100">مسابقه هوش</a></li>
+                <li><a href="#game" class="text-gray-600 hover:text-mofid-blue font-medium transition duration-300 rounded-md p-2 hover:bg-gray-100">بازی</a></li>
+            </ul>
+            <button class="md:hidden text-gray-600 hover:text-mofid-blue focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+    </header>
+
+    <section class="relative py-20 md:py-32 text-center overflow-hidden bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="hero-background-image"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6 animate-fade-in-down">
+                <span class="text-mofid-blue">هدف کمیته تحقیق و توسعه:</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-3xl mx-auto animate-fade-in-up">
+                اینجا دور هم جمع شدیم تا هم حال مشتریامون رو بهتر کنیم و هم با ایده‌های ناب و خلاقانه شما، مرکز تماسمون رو پویاتر و جذاب‌تر از همیشه بسازیم.
+            </p>
+            <a href="#cooperation" class="inline-block bg-mofid-blue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-mofid-light-blue transform hover:scale-105 transition duration-300 ease-in-out animate-bounce-in">
+                همکاری با ما
+            </a>
+        </div>
+        <div class="absolute inset-0 z-0 opacity-20">
+            <div class="absolute top-1/4 left-1/4 w-48 h-48 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+            <div class="absolute top-1/2 right-1/4 w-64 h-64 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-1/4 left-1/3 w-56 h-56 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+        </div>
+    </section>
+
+    <section id="responsibilities" class="py-16 md:py-24 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-12 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">وظایف کلیدی کمیته</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.007 12.007 0 002 12c0 2.755 1.09 5.284 2.872 7.126M18 12v6m-3-6h6"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">بهبود فرآیندها</h3>
+                    <p class="text-gray-600">تحلیل و بهینه‌سازی فرآیندهای موجود مرکز تماس برای افزایش کارایی و اثربخشی.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">معرفی فناوری‌های نوین</h3>
+                    <p class="text-gray-600">پژوهش و پیاده‌سازی جدیدترین تکنولوژی‌ها برای ارتقاء سطح خدمات و تجربه مشتری.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H2v-2a4 4 0 014-4h12.556"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9V3m0 0l3 3m-3-3L7 6m4 4h4m-4 0h-4m4 0v4m-4 0v4"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">افزایش رضایت مشتری</h3>
+                    <p class="text-gray-600">شناسایی نیازهای مشتریان و ارائه راهکارهای خلاقانه برای بهبود رضایتمندی آن‌ها.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M18 14V6M6 18h8a2 2 0 002-2V8a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">تحلیل عملکرد</h3>
+                    <p class="text-gray-600">جمع‌آوری و تحلیل داده‌های عملکردی مرکز تماس برای شناسایی نقاط قوت و ضعف.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">آموزش و توسعه</h3>
+                    <p class="text-gray-600">طراحی و اجرای برنامه‌های آموزشی برای ارتقاء دانش و مهارت‌های کارکنان مرکز تماس.</p>
+                </div>
+                <div class="bg-gray-50 p-8 rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out border border-gray-200">
+                    <div class="text-mofid-blue mb-4">
+                        <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">نوآوری و خلاقیت</h3>
+                    <p class="text-gray-600">تشویق و حمایت از ایده‌های نوآورانه برای ایجاد ارزش افزوده در خدمات مرکز تماس.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-gray-100 rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-12 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">درباره کمیته تحقیق و توسعه</h2>
+            <p class="text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
+                کمیته تحقیق و توسعه مرکز تماس کارگزاری مفید با هدف ارتقاء کیفیت خدمات، افزایش بهره‌وری و نوآوری در فرآیندهای ارتباط با مشتریان تشکیل شده است. ما با رویکردی داده‌محور و با بهره‌گیری از آخرین دستاوردهای علمی و فناورانه، در تلاشیم تا تجربه مشتریان از مرکز تماس را به بهترین شکل ممکن بهبود بخشیم و آن را به الگویی در صنعت تبدیل کنیم.
+            </p>
+        </div>
+    </section>
+
+    <section id="cooperation" class="py-16 md:py-24 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-12 px-6 mb-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">دعوت به همکاری</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                اگر علاقه‌مند به همکاری با کمیته تحقیق و توسعه مرکز تماس کارگزاری مفید هستید، لطفاً فرم زیر را تکمیل کنید.
+            </p>
+            <form id="cooperationForm" class="max-w-xl mx-auto space-y-6">
+                <div>
+                    <input type="text" id="fullName" placeholder="نام و نام خانوادگی" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required>
+                </div>
+                <div>
+                    <input type="text" id="fieldOfStudy" placeholder="رشته تحصیلی" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required>
+                </div>
+                <div>
+                    <input type="email" id="organizationalEmail" placeholder="ایمیل سازمانی" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required>
+                </div>
+                <div>
+                    <input type="text" id="teamName" placeholder="نام تیم" class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required>
+                </div>
+                <div>
+                    <label for="rdQuestion" class="block text-gray-700 text-lg font-medium mb-2 text-right">
+                        اگر شما مسئول تحقیق و توسعه مرکز تماس بودید، اولین گامی که برای ایجاد تحول برمی‌داشتید چه بود و چرا؟
+                    </label>
+                    <textarea id="rdQuestion" rows="4" placeholder="پاسخ خود را بنویسید..." class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required></textarea>
+                </div>
+                <div>
+                    <label for="ideaSuggestion" class="block text-gray-700 text-lg font-medium mb-2 text-right">
+                        ایده یا پیشنهاد خود را برای بهبود مرکز تماس بنویسید:
+                    </label>
+                    <textarea id="ideaSuggestion" rows="5" placeholder="ایده و پیشنهاد شما..." class="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-mofid-blue text-white font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-mofid-light-blue transform hover:scale-105 transition duration-300 ease-in-out">
+                    ارسال فرم
+                </button>
+            </form>
+            <div id="cooperationSuccessMessage" class="mt-8 p-4 bg-green-100 text-green-800 rounded-lg shadow-md hidden" role="alert">
+                <p class="font-bold text-right">با تشکر!</p>
+                <p class="text-right">دوست عزیز ممنون که دغدغه مند بودی و امیدوارم که به زودی بتونیم از مهارتت تو تیممون استفاده کنیم.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="quiz" class="py-16 md:py-24 bg-gray-100 rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-12 px-6 mb-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">مسابقه هوش مرکز تماس</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                دانش خود را محک بزنید و شانس خودتون رو برای هم تیمی شدن با ما بیشتر کنید و برنده بشید
+            </p>
+            <button id="startQuizButton" class="inline-block bg-mofid-blue text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-mofid-light-blue transform hover:scale-105 transition duration-300 ease-in-out">
+                شروع مسابقه
+            </button>
+
+            <div id="quizContainer" class="mt-12 p-8 bg-white rounded-lg shadow-xl hidden">
+                <div id="quizIntro" class="text-center">
+                    <p class="text-lg text-gray-700 mb-4">هر سوال ۱۸ ثانیه فرصت پاسخگویی دارد.</p>
+                    <input type="email" id="quizEmail" placeholder="ایمیل سازمانی شما (فقط با دامنه @emofid.com)" class="w-full md:w-1/2 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-mofid-blue focus:border-transparent transition duration-200 shadow-sm text-right" dir="rtl" required>
+                    <button id="confirmQuizStart" class="mt-4 bg-green-600 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-green-700 transition duration-300">تایید و شروع</button>
+                </div>
+
+                <div id="quizContent" class="hidden">
+                    <div class="flex justify-between items-center mb-6">
+                        <p class="text-lg font-semibold text-gray-700">سوال <span id="currentQuestionNumber">1</span> از 8</p>
+                        <p class="text-lg font-semibold text-gray-700">زمان باقی‌مانده: <span id="quizTimer" class="text-mofid-blue font-bold">18</span> ثانیه</p>
+                    </div>
+                    <p id="questionText" class="text-xl font-bold text-gray-900 mb-6 text-right"></p>
+                    <div id="optionsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        </div>
+                    <button id="nextQuestionButton" class="mt-8 bg-mofid-blue text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-mofid-light-blue transition duration-300 hidden">
+                        سوال بعدی
+                    </button>
+                </div>
+
+                <div id="quizResult" class="mt-12 hidden">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">نتایج مسابقه</h3>
+                    <p class="text-xl text-gray-700">امتیاز شما: <span id="finalScore" class="text-mofid-blue font-bold"></span> از 8</p>
+                    <p class="text-gray-600 mt-4">پاسخ صحیح سوالات به ایمیل سازمانی شما ارسال خواهد شد. (این یک شبیه‌سازی است و ایمیلی واقعی ارسال نمی‌شود.)</p>
+                    <button id="restartQuizButton" class="mt-8 bg-green-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-green-700 transition duration-300">
+                        بستن مسابقه
+                    </button>
+                </div>
+                <div id="quizMessage" class="mt-8 p-4 bg-red-100 text-red-800 rounded-lg shadow-md hidden">
+                    <p class="font-bold text-right">خطا!</p>
+                    <p id="quizMessageText" class="text-right"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="game" class="py-16 md:py-24 bg-white rounded-lg shadow-md mx-4 md:mx-auto max-w-6xl mt-12 px-6 mb-12">
+        <div class="container mx-auto text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8">بازی: وضعیت نماد</h2>
+            <p class="text-lg text-gray-700 mb-8 max-w-2xl mx-auto">
+                با توجه به وضعیت نماد، گزینه‌های صحیح را انتخاب کنید و سکه بگیرید
+            </p>
+            <div id="symbolStatusGameContainer">
+                <div class="flex justify-between items-center w-full mb-6">
+                    <div class="text-xl font-bold text-gray-900">امتیاز: <span id="gameScore">0</span> سکه</div>
+                    <div class="text-xl font-bold text-gray-900">زمان: <span id="gameTimer">15</span> ثانیه</div>
+                </div>
+                <h3 class="text-2xl font-bold text-mofid-blue mb-8">وضعیت نماد: <span id="symbolStatusText"></span></h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 w-full max-w-md">
+                    <div class="flex flex-col items-center">
+                        <p class="text-lg font-semibold mb-2">انجام معامله</p>
+                        <div class="flex space-x-2 rtl:space-x-reverse">
+                            <button class="game-button px-4 py-2" data-action="trade" data-value="true">بله</button>
+                            <button class="game-button px-4 py-2" data-action="trade" data-value="false">خیر</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <p class="text-lg font-semibold mb-2">ویرایش و حذف</p>
+                        <div class="flex space-x-2 rtl:space-x-reverse">
+                            <button class="game-button px-4 py-2" data-action="edit_delete" data-value="true">بله</button>
+                            <button class="game-button px-4 py-2" data-action="edit_delete" data-value="false">خیر</button>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <p class="text-lg font-semibold mb-2">ارسال سفارش</p>
+                        <div class="flex space-x-2 rtl:space-x-reverse">
+                            <button class="game-button px-4 py-2" data-action="send_order" data-value="true">بله</button>
+                            <button class="game-button px-4 py-2" data-action="send_order" data-value="false">خیر</button>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submitGameAnswer" class="game-button mt-8 w-full max-w-xs">تایید</button>
+                <button id="startGameButton" class="game-button mt-4 w-full max-w-xs hidden">شروع مجدد</button>
+
+                <div id="gameResult" class="mt-4 p-4 bg-green-100 text-green-800 rounded-lg shadow-md hidden w-full">
+                    <p id="gameResultMessage" class="font-bold text-right"></p>
+                    <p id="finalGameScore" class="text-right"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-mofid-blue text-white py-8 px-6 md:px-12 text-center rounded-t-lg">
+        <div class="container mx-auto">
+            <p>© 2025 کمیته تحقیق و توسعه. تمامی حقوق محفوظ است.</p>
+            <p class="mt-2">این سایت توسط مهدی حائری ساخته شده است.</p>
+            <div class="flex justify-center space-x-6 rtl:space-x-reverse mt-4">
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">سیاست حفظ حریم خصوصی</a>
+                <a href="#" class="text-gray-400 hover:text-white transition duration-300">شرایط خدمات</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Cooperation Form Logic ---
+        document.getElementById('cooperationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const fullName = document.getElementById('fullName').value;
+            const fieldOfStudy = document.getElementById('fieldOfStudy').value;
+            const organizationalEmail = document.getElementById('organizationalEmail').value;
+            const teamName = document.getElementById('teamName').value; // Added team name
+            const rdQuestionAnswer = document.getElementById('rdQuestion').value;
+            const ideaSuggestion = document.getElementById('ideaSuggestion').value;
+
+            const successMessageDiv = document.getElementById('cooperationSuccessMessage');
+
+            // Display success message
+            successMessageDiv.classList.remove('hidden');
+
+            // In a real application, you would send this data to a server
+            console.log('Form Submitted:', {
+                fullName,
+                fieldOfStudy,
+                organizationalEmail,
+                teamName, // Log team name
+                rdQuestionAnswer,
+                ideaSuggestion
+            });
+
+            // Optionally, clear the form after submission
+            this.reset();
+        });
+
+        // --- Quiz Logic ---
+        const allQuizQuestions = [
+            {
+                question: "کدام شاخص، میانگین زمان صرف شده توسط یک کارشناس برای رسیدگی به یک تماس را نشان می‌دهد؟",
+                options: ["الف) FCR (First Call Resolution)", "ب) AHT (Average Handle Time)", "ج) CSAT (Customer Satisfaction)", "د) SL (Service Level)"],
+                correct: "ب) AHT (Average Handle Time)"
+            },
+            {
+                question: "اگر نرخ حل مشکل در تماس اول (FCR) افزایش یابد، چه تاثیری بر رضایت مشتری دارد؟",
+                options: ["الف) کاهش رضایت", "ب) افزایش رضایت", "ج) بدون تغییر", "د) فقط بر کارایی داخلی تاثیر دارد"],
+                correct: "ب) افزایش رضایت"
+            },
+            {
+                question: "میانگین مدت‌زمان حضور در صف (Average time in queue) به چه معناست؟",
+                options: ["الف) میانگین زمان انتظار مشتری برای پاسخگویی", "ب) میانگین زمان مکالمه کارشناس", "ج) میانگین زمان پس از تماس", "د) میانگین زمان حل مشکل"],
+                correct: "الف) میانگین زمان انتظار مشتری برای پاسخگویی"
+            },
+            {
+                question: "شاخص CSAT (Customer Satisfaction) چه چیزی را اندازه‌گیری می‌کند؟",
+                options: ["الف) وفاداری مشتری", "ب) رضایت کلی مشتری از خدمات", "ج) زمان حل مشکل", "د) کارایی کارشناس"],
+                correct: "ب) رضایت کلی مشتری از خدمات"
+            },
+            {
+                question: "امتیاز خالص وفاداری مشتری (NPS) چه چیزی را نشان می‌دهد؟",
+                options: ["الف) تعداد مشتریان جدید", "ب) احتمال توصیه خدمات به دیگران", "ج) میزان شکایت مشتریان", "د) تعداد تماس‌های ورودی"],
+                correct: "ب) احتمال توصیه خدمات به دیگران"
+            },
+            {
+                question: "کارگزاری مفید در چه سالی تاسیس شد؟",
+                options: ["الف) سال ۱۳۷۰", "ب) سال ۱۳۷۳", "ج) سال ۱۳۷۵", "د) سال ۱۳۸۰"],
+                correct: "ب) سال ۱۳۷۳"
+            },
+            {
+                question: "بهترین تیم مرکز تماس بنابر شاخص‌های مرکز تماس و رضایت مشتریان کدام است؟",
+                options: ["الف) تیم ۱", "ب) تیم ۱۰", "ج) تیم ۱۱", "د) تیم عصر و شب", "ه) تیم چت"],
+                correct: "الف) تیم ۱"
+            },
+            {
+                question: "کدام رنگ بیشتر خشم را کاهش می‌دهد؟",
+                options: ["الف) سبز کمرنگ", "ب) صورتی فلورسنت", "ج) مشکی براق", "د) زرد پررنگ"],
+                correct: "الف) سبز کمرنگ"
+            },
+            {
+                question: "کدام صدا استرس را کم می‌کند؟",
+                options: ["الف) صدای جویدن سیب", "ب) تق تق مداد", "ج) باد کردن بادکنک", "د) صدای تایپ کردن"],
+                correct: "الف) صدای جویدن سیب"
+            },
+            {
+                question: "کدام میوه نماد آرامش است؟",
+                options: ["الف) آناناس", "ب) انجیر", "ج) پرتقال", "د) موز"],
+                correct: "ب) انجیر"
+            },
+            {
+                question: "مشتری می‌گوید: «من از کارگزاری شما راضیم.» بهترین پاسخ شما چیست؟",
+                options: ["الف) خوبه، به انگشت کوچیکه دست راستم", "ب) ممنون حالا برو", "ج) آره، ما بهترینیم", "د) خوشحالم که راضی هستید، همیشه در کنارتونیم"],
+                correct: "د) خوشحالم که راضی هستید، همیشه در کنارتونیم"
+            },
+            {
+                question: "بهترین روش برای آروم کردن مشتری ناراضی چیه؟",
+                options: ["الف) اشکال از خودتونه", "ب) مشکلتون رو متوجه شدم، در اسرع وقت حلش می‌کنیم", "ج) سکوت کن تا خودش خسته بشه", "د) همینی که هست، دیگه تماس نگیر"],
+                correct: "ب) مشکلتون رو متوجه شدم، در اسرع وقت حلش می‌کنیم"
+            }
+        ];
+
+        let shuffledQuizQuestions = [];
+        let currentQuizQuestionIndex = 0;
+        let score = 0;
+        let timerInterval;
+        let timeRemaining = 18;
+        const QUIZ_ATTEMPTED_EMAILS_KEY = 'quiz_attempted_emails_mofid_call_center_rd';
+        const fixedQuestionText = "بهترین تیم مرکز تماس بنابر شاخص‌های مرکز تماس و رضایت مشتریان کدام است؟";
+
+        const quizContainer = document.getElementById('quizContainer');
+        const quizIntro = document.getElementById('quizIntro');
+        const quizContent = document.getElementById('quizContent');
+        const quizResult = document.getElementById('quizResult');
+        const quizMessage = document.getElementById('quizMessage');
+        const quizMessageText = document.getElementById('quizMessageText');
+        const startQuizButton = document.getElementById('startQuizButton');
+        const confirmQuizStart = document.getElementById('confirmQuizStart');
+        const currentQuestionNumber = document.getElementById('currentQuestionNumber');
+        const quizTimer = document.getElementById('quizTimer');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const nextQuestionButton = document.getElementById('nextQuestionButton');
+        const finalScore = document.getElementById('finalScore');
+        const restartQuizButton = document.getElementById('restartQuizButton');
+        const quizEmailInput = document.getElementById('quizEmail');
+
+        function loadAttemptedEmails() {
+            const emailsJson = localStorage.getItem(QUIZ_ATTEMPTED_EMAILS_KEY);
+            return emailsJson ? new Set(JSON.parse(emailsJson)) : new Set();
+        }
+
+        function saveAttemptedEmail(email) {
+            const emails = loadAttemptedEmails();
+            emails.add(email);
+            localStorage.setItem(QUIZ_ATTEMPTED_EMAILS_KEY, JSON.stringify(Array.from(emails)));
+        }
+
+        function isEmailAttempted(email) {
+            const emails = loadAttemptedEmails();
+            return emails.has(email);
+        }
+
+        function validateEmailFormat(email) {
+            const lowerCaseEmail = email.toLowerCase();
+            // Only allow @test.com or @emofid.com
+            return lowerCaseEmail.endsWith('@test.com') || lowerCaseEmail.endsWith('@emofid.com');
+        }
+
+        startQuizButton.addEventListener('click', () => {
+            quizContainer.classList.remove('hidden');
+            quizIntro.classList.remove('hidden');
+            quizContent.classList.add('hidden');
+            quizResult.classList.add('hidden');
+            quizMessage.classList.add('hidden');
+            quizEmailInput.value = ''; // Clear email input for fresh start
+            quizEmailInput.disabled = false; // Ensure it's editable
+            confirmQuizStart.disabled = false;
+        });
+
+        confirmQuizStart.addEventListener('click', () => {
+            const enteredEmail = quizEmailInput.value.toLowerCase();
+
+            if (!enteredEmail) {
+                quizMessage.classList.remove('hidden');
+                quizMessage.classList.remove('bg-green-100', 'text-green-800');
+                quizMessage.classList.add('bg-red-100', 'text-red-800');
+                quizMessageText.textContent = 'لطفاً ایمیل سازمانی خود را وارد کنید.';
+                return;
+            }
+            if (!validateEmailFormat(enteredEmail)) {
+                quizMessage.classList.remove('hidden');
+                quizMessage.classList.remove('bg-green-100', 'text-green-800');
+                quizMessage.classList.add('bg-red-100', 'text-red-800');
+                quizMessageText.textContent = 'فرمت ایمیل نامعتبر است. فقط ایمیل‌های با دامنه @emofid.com مجاز هستند.';
+                return;
+            }
+            if (isEmailAttempted(enteredEmail)) {
+                quizMessage.classList.remove('hidden');
+                quizMessage.classList.remove('bg-green-100', 'text-green-800');
+                quizMessage.classList.add('bg-red-100', 'text-red-800');
+                quizMessageText.textContent = 'شما قبلاً با این ایمیل در مسابقه شرکت کرده‌اید.';
+                return;
+            }
+
+            quizIntro.classList.add('hidden');
+            quizContent.classList.remove('hidden');
+            quizEmailInput.disabled = true; // Disable email input once quiz starts
+            confirmQuizStart.disabled = true;
+            startQuiz();
+        });
+
+        restartQuizButton.addEventListener('click', () => {
+            quizContainer.classList.add('hidden');
+            quizResult.classList.add('hidden');
+            quizMessage.classList.add('hidden');
+            // Do not clear email input here, as it's tied to an attempted email
+            // The main startQuizButton will handle re-enabling if a new email is entered
+        });
+
+        nextQuestionButton.addEventListener('click', () => {
+            displayNextQuestion();
+        });
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+            }
+            return array;
+        }
+
+        function startQuiz() {
+            const fixedQuestion = allQuizQuestions.find(q => q.question === fixedQuestionText);
+            const otherQuestions = allQuizQuestions.filter(q => q.question !== fixedQuestionText);
+
+            const randomOtherQuestions = shuffleArray([...otherQuestions]).slice(0, 7); // Get 7 random questions
+            shuffledQuizQuestions = shuffleArray([fixedQuestion, ...randomOtherQuestions]); // Add fixed question and shuffle again
+
+            currentQuizQuestionIndex = 0;
+            score = 0;
+            quizMessage.classList.add('hidden');
+            nextQuestionButton.classList.add('hidden');
+            displayQuestion();
+            startTimer();
+        }
+
+        function displayQuestion() {
+            clearInterval(timerInterval);
+            timeRemaining = 18;
+            quizTimer.textContent = timeRemaining;
+
+            if (currentQuizQuestionIndex < shuffledQuizQuestions.length) {
+                const questionData = shuffledQuizQuestions[currentQuizQuestionIndex];
+                currentQuestionNumber.textContent = currentQuizQuestionIndex + 1;
+                questionText.textContent = questionData.question;
+                optionsContainer.innerHTML = '';
+
+                questionData.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('w-full', 'p-3', 'border', 'border-gray-300', 'rounded-lg', 'text-right', 'hover:bg-blue-100', 'transition', 'duration-200', 'shadow-sm', 'text-gray-700', 'font-medium', 'focus:outline-none', 'focus:ring-2', 'focus:ring-mofid-blue');
+                    button.addEventListener('click', () => selectOption(button, option, questionData.correct));
+                    optionsContainer.appendChild(button);
+                });
+                nextQuestionButton.classList.add('hidden');
+                startTimer();
+            } else {
+                endQuiz();
+            }
+        }
+
+        function selectOption(selectedButton, selectedOption, correctAnswer) {
+            clearInterval(timerInterval);
+
+            Array.from(optionsContainer.children).forEach(button => {
+                button.disabled = true;
+                button.classList.remove('hover:bg-blue-100');
+                if (button.textContent === correctAnswer) {
+                    button.classList.add('bg-green-200', 'border-green-500');
+                } else if (selectedButton && button === selectedButton) {
+                    button.classList.add('bg-red-200', 'border-red-500');
+                }
+            });
+
+            if (selectedOption === correctAnswer) {
+                score++;
+            }
+            nextQuestionButton.classList.remove('hidden');
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                quizTimer.textContent = timeRemaining;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    selectOption(null, null, shuffledQuizQuestions[currentQuizQuestionIndex].correct);
+                    setTimeout(() => {
+                        displayNextQuestion();
+                    }, 1000);
+                }
+            }, 1000);
+        }
+
+        function displayNextQuestion() {
+            currentQuizQuestionIndex++;
+            displayQuestion();
+        }
+
+        function endQuiz() {
+            quizContent.classList.add('hidden');
+            quizResult.classList.remove('hidden');
+            finalScore.textContent = score;
+
+            saveAttemptedEmail(quizEmailInput.value.toLowerCase()); // Mark email as attempted
+
+            console.log(`Quiz finished. Score: ${score}/8. Email to: ${quizEmailInput.value}`);
+        }
+
+        // --- Symbol Status Game Logic ---
+        const symbolStatusData = [
+            {
+                status: "مجاز",
+                actions: { trade: true, edit_delete: true, send_order: true }
+            },
+            {
+                status: "مجاز-محفوظ",
+                actions: { trade: false, edit_delete: true, send_order: true }
+            },
+            {
+                status: "مجاز - متوقف",
+                actions: { trade: false, edit_delete: false, send_order: true }
+            },
+            {
+                status: "ممنوع",
+                actions: { trade: false, edit_delete: false, send_order: false }
+            },
+            {
+                status: "ممنوع - متوقف",
+                actions: { trade: false, edit_delete: false, send_order: false }
+            }
+        ];
+
+        let currentGameScore = 0;
+        let gameTimeRemaining = 15; // Time per round
+        let gameTimerInterval;
+        let currentSymbolStatus = null;
+
+        const gameScoreDisplay = document.getElementById('gameScore');
+        const gameTimerDisplay = document.getElementById('gameTimer');
+        const symbolStatusText = document.getElementById('symbolStatusText');
+        const actionButtons = document.querySelectorAll('#symbolStatusGameContainer .game-button[data-action]');
+        const submitGameAnswerButton = document.getElementById('submitGameAnswer');
+        const gameStartButton = document.getElementById('startGameButton'); // Renamed to avoid conflict with quiz button
+        const gameResultDiv = document.getElementById('gameResult');
+        const gameResultMessage = document.getElementById('gameResultMessage');
+        const finalGameScoreDisplay = document.getElementById('finalGameScore');
+
+        function resetGame() {
+            currentGameScore = 0;
+            gameScoreDisplay.textContent = currentGameScore;
+            gameResultDiv.classList.add('hidden');
+            gameStartButton.classList.add('hidden');
+            submitGameAnswerButton.classList.remove('hidden');
+            enableActionButtons();
+            startNewRound();
+        }
+
+        function startNewRound() {
+            clearInterval(gameTimerInterval);
+            gameTimeRemaining = 15;
+            gameTimerDisplay.textContent = gameTimeRemaining;
+
+            currentSymbolStatus = symbolStatusData[Math.floor(Math.random() * symbolStatusData.length)];
+            symbolStatusText.textContent = currentSymbolStatus.status;
+
+            // Deselect all buttons
+            actionButtons.forEach(button => {
+                button.classList.remove('selected', 'correct', 'incorrect');
+            });
+
+            // Start timer for the round
+            gameTimerInterval = setInterval(() => {
+                gameTimeRemaining--;
+                gameTimerDisplay.textContent = gameTimeRemaining;
+                if (gameTimeRemaining <= 0) {
+                    clearInterval(gameTimerInterval);
+                    checkGameAnswer(true); // Auto-submit if time runs out
+                }
+            }, 1000);
+        }
+
+        function enableActionButtons() {
+            actionButtons.forEach(button => {
+                button.disabled = false;
+            });
+        }
+
+        function disableActionButtons() {
+            actionButtons.forEach(button => {
+                button.disabled = true;
+            });
+        }
+
+        actionButtons.forEach(button => {
+            button.addEventListener('click', (event) => {
+                const clickedButton = event.target;
+                const actionType = clickedButton.dataset.action;
+                // Deselect other buttons for the same action type
+                document.querySelectorAll(`.game-button[data-action="${actionType}"]`).forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                clickedButton.classList.add('selected');
+            });
+        });
+
+        submitGameAnswerButton.addEventListener('click', () => checkGameAnswer(false));
+        gameStartButton.addEventListener('click', resetGame); // Use gameStartButton for this game
+
+        function checkGameAnswer(timeExpired) {
+            clearInterval(gameTimerInterval);
+            disableActionButtons();
+
+            let correctSelections = 0;
+            let totalChecks = 0;
+
+            const userSelections = {
+                trade: null,
+                edit_delete: null,
+                send_order: null
+            };
+
+            actionButtons.forEach(button => {
+                if (button.classList.contains('selected')) {
+                    userSelections[button.dataset.action] = (button.dataset.value === 'true');
+                }
+            });
+
+            // Check each action
+            for (const action in currentSymbolStatus.actions) {
+                totalChecks++;
+                const isCorrect = userSelections[action] === currentSymbolStatus.actions[action];
+
+                // Highlight buttons
+                document.querySelectorAll(`.game-button[data-action="${action}"]`).forEach(btn => {
+                    if ((btn.dataset.value === 'true' && currentSymbolStatus.actions[action]) ||
+                        (btn.dataset.value === 'false' && !currentSymbolStatus.actions[action])) {
+                        btn.classList.add('correct'); // Correct option
+                    } else if (btn.classList.contains('selected') && !isCorrect) {
+                        btn.classList.add('incorrect'); // Incorrect selected option
+                    }
+                });
+
+                if (isCorrect) {
+                    correctSelections++;
+                }
+            }
+
+            gameResultDiv.classList.remove('hidden');
+            submitGameAnswerButton.classList.add('hidden');
+            gameStartButton.classList.remove('hidden'); // Show restart button for this game
+
+            if (correctSelections === totalChecks) {
+                const timeBonus = gameTimeRemaining > 0 ? gameTimeRemaining : 0; // Bonus for remaining time
+                const roundScore = 10 + timeBonus;
+                gameResultMessage.textContent = `پاسخ صحیح بود! +${roundScore} سکه`;
+                gameResultDiv.classList.remove('bg-red-100', 'text-red-800');
+                gameResultDiv.classList.add('bg-green-100', 'text-green-800');
+                currentGameScore += roundScore; // Award coins
+                gameScoreDisplay.textContent = currentGameScore;
+            } else {
+                gameResultMessage.textContent = 'پاسخ نادرست بود. تلاش مجدد!';
+                gameResultDiv.classList.remove('bg-green-100', 'text-green-800');
+                gameResultDiv.classList.add('bg-red-100', 'text-red-800');
+            }
+            finalGameScoreDisplay.textContent = `امتیاز نهایی در این راند: ${currentGameScore} سکه`;
+        }
+
+        // Initial setup for the game
+        window.onload = function() {
+            resetGame(); // Start the first round of the Symbol Status game
+        };
+
+    </script>
+</body>
+</html>
